@@ -34,8 +34,6 @@ jobs:
         run: npm ci
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - name: Build portfolio
         run: npm run build
       - name: Upload Pages artifact
