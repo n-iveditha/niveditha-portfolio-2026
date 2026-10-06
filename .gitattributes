@@ -147,5 +147,5 @@
 
 # Keep portfolio assets available to Vercel builds without Git LFS downloads.
 src/assets/*.png     -filter -diff -merge
-public/monogram.png  -filter -diff -merge
+public/*.png         -filter -diff -merge
 src/Niveditha_B.pdf  -filter -diff -merge
