@@ -10,6 +10,7 @@ import sevaqueue2 from "./assets/sevaqueue2.png"
 import totalAssurancePage1 from "./assets/ta1.png"
 import totalAssurancePage2 from "./assets/ta2.png"
 import resume from "./Niveditha_B.pdf"
+import IntroLoader from "./IntroLoader"
 
 const portrait = homeImage
 
@@ -302,7 +303,19 @@ function ProjectCard({
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [active, setActive] = useState("about")
+  const [introVisible, setIntroVisible] = useState(true)
+  const [introExiting, setIntroExiting] = useState(false)
   const cursorRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const exitTimer = window.setTimeout(() => setIntroExiting(true), 2400)
+    const removeTimer = window.setTimeout(() => setIntroVisible(false), 3100)
+
+    return () => {
+      window.clearTimeout(exitTimer)
+      window.clearTimeout(removeTimer)
+    }
+  }, [])
 
   useEffect(() => {
     const reveal = new IntersectionObserver(
@@ -343,7 +356,8 @@ function App() {
   }, [])
 
   return (
-    <div className="site-shell">
+    <div className="site-shell" inert={introVisible}>
+      {introVisible && <IntroLoader isExiting={introExiting} />}
       <div className="grain" aria-hidden="true" />
       <div className="cursor" ref={cursorRef}>
         <span>VIEW</span>

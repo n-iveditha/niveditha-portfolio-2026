@@ -203,6 +203,55 @@ footer { width: min(1200px, calc(100% - 64px)); min-height: 120px; margin: 0 aut
 @keyframes scrollBounce { 50% { transform: translateY(5px); } }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
+.intro-loader {
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  place-items: center;
+  background: #080808;
+  color: #f8f7fa;
+  opacity: 1;
+  transition: opacity 700ms ease;
+}
+.intro-loader.is-exiting { opacity: 0; }
+.intro-loader-content { display: flex; flex-direction: column; align-items: center; padding: 24px; text-align: center; }
+.intro-loader-dots { display: flex; align-items: center; gap: 9px; margin-bottom: 30px; }
+.intro-loader-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lavender); animation: intro-dot-pulse 1.2s ease-in-out infinite; }
+.intro-loader-dot:nth-child(2) { animation-delay: 120ms; }
+.intro-loader-dot:nth-child(3) { animation-delay: 240ms; }
+.intro-loader-dot:nth-child(4) { animation-delay: 360ms; }
+.intro-loader-dot:nth-child(5) { background: #f4f0fa; animation-delay: 480ms; }
+.intro-loader-name { margin: 0; color: #f8f7fa; font-size: 56px; font-weight: 600; letter-spacing: -.055em; line-height: 1.1; }
+.intro-loader-tagline { margin: 12px 0 0; color: #99969e; font-size: 16px; font-weight: 400; line-height: 1.5; animation: intro-tagline-in 700ms ease-out 180ms both; }
+
+@keyframes intro-dot-pulse {
+  0%, 100% { opacity: .3; transform: scale(.8); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+@keyframes intro-tagline-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (min-width: 761px) and (max-width: 1024px) {
+  .intro-loader-name { font-size: 48px; }
+}
+
+@media (max-width: 760px) {
+  .intro-loader-dots { gap: 8px; margin-bottom: 25px; }
+  .intro-loader-dot { width: 7px; height: 7px; }
+  .intro-loader-name { font-size: 40px; }
+  .intro-loader-tagline { margin-top: 10px; font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-loader-dot, .intro-loader-tagline { animation: none; }
+}
+
 @media (max-width: 1024px) {
   .hero { width: min(940px, calc(100% - 48px)); grid-template-columns: 1fr .8fr; gap: 20px; }
   .hero-copy { padding-left: 0; }.hero-art { transform: scale(.82); transform-origin: center; }
